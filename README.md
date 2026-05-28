@@ -2,6 +2,29 @@
 
 A command-line utility written in Ruby to manage, document, and interact with Julia named environments. 
 
+---
+
+## Understanding Julia Environments
+
+To understand why `julia_envs` is useful, it is helpful to compare the three ways Julia handles package environments:
+
+### 1. The Global Environment (`@v1.x`)
+By default, if you do not specify a project directory, Julia runs in the global environment.
+* **The Problem**: Installing all packages globally eventually leads to **"Dependency Hell."** Different packages specify strict compatibility bounds (e.g., Package A requires `DataFrames v0.22` or older, while Package B requires `DataFrames v1.0` or newer). Over time, your package manager will reach a version conflict deadlock, refusing to install or update any more packages.
+
+### 2. Local Directory Environments (`--project=.`)
+A local environment is created within a specific directory, tracking dependencies in local `Project.toml` and `Manifest.toml` files.
+* **The Problem**: While this is the standard for reproducible research or shared repositories, it adds repetitive overhead for single-file scripts or quick calculations. You must create a new folder, initialize a project, and manually run `Pkg.add()` for basic packages every time, creating unnecessary directory clutter.
+
+### 3. Shared Named Environments (The Hybrid Solution)
+A named environment (e.g., `@plotting` or `@data`) is an isolated environment stored globally under `~/.julia/environments/`.
+* **Why They Are Useful**: They represent the ideal compromise. You can group related workflows into shared, isolated environments (e.g., putting `Plots` and `Cairo` inside `@plotting`, and `DataFrames` and `CSV` inside `@data`). 
+  - They keep your global environment clean, preventing version conflicts.
+  - They eliminate the need to create localized project folders for every quick script you write.
+  - They execute and compile **instantly** because the package versions are globally resolved and cached once.
+
+---
+
 ## Features
 
 - **List Environments**: Display all existing Julia named environments along with custom user-defined descriptions.
