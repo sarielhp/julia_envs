@@ -1,0 +1,5 @@
+# Ignore local editor backups and system-specific files
+*~
+*.swp
+.DS_Store
+.directory
