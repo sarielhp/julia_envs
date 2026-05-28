@@ -33,6 +33,7 @@ A named environment (e.g., `@plotting` or `@data`) is an isolated environment st
 - **Describe Environment**: Add or update a text description in an environment's `Project.toml` to help document its purpose.
 - **Create from Script**: Scan a Julia script for `using` or `import` statements, extract all required packages, and automatically build a new named environment with those dependencies.
 - **Match Script to Environments**: Scan a Julia script and identify which of your existing named environments have enough registered packages to run it.
+- **Match and Run Script (mrun)**: Scan a Julia script, automatically find an existing named environment that satisfies its dependencies, and run the script in it.
 - **Run Script**: Execute a Julia script directly using a specific named environment.
 - **Launch REPL**: Start an interactive Julia REPL session inside a named environment.
 - **Remove Environment**: Delete an unwanted named environment with interactive confirmation.
@@ -61,6 +62,7 @@ julia_envs add <env_name> <pkg1> <pkg2>..  Add packages to a named environment
 julia_envs describe <env_name> "<desc>"    Add/change description of an environment
 julia_envs create <env_name> <script.jl>   Create an environment from a Julia script
 julia_envs match <script.jl>               Find environments that can run a script
+julia_envs mrun <script.jl> [args...]      Run a Julia script in a matching named env
 julia_envs run <env_name> <script.jl> [..] Run a Julia script in a named environment
 julia_envs repl <env_name>                 Launch Julia REPL in a named environment
 julia_envs rm <env_name>                   Delete a named environment
